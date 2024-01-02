@@ -3,7 +3,7 @@ import { NavLink, Link } from 'react-router-dom';
 import { FaChartBar, FaBook, FaHistory } from 'react-icons/fa';
 // import { ToTosArrowForward } from 'react-icons/io';
 import BookIcon from '../assets/BookIcon.png';
-import PurpleBackground from '../assets/purpleback.jpg';
+import PurpleBackground from '../assets/purplebackground.png';
 // import { categories } from '../utils/data';
 
 const Sidebar = () => {
@@ -11,14 +11,14 @@ const Sidebar = () => {
   //   if (closeToggle) closeToggle(false);
   // }
 
-  const isNotActiveStyle = 'flex text-[16px] px-5 gap-3 font-extrabold w-full min-h-[40px] items-center capitalize transition-transform transform hover:scale-105';
-  const isActiveStyle = 'flex items-center text-[16px] bg-white px-5 gap-3 font-extrabold w-full rounded-l-full min-h-[40px] transition-all duratin-200 ease-in-out capitalize text-black';
+  const isNotActiveStyle = 'flex text-[14px] px-5 gap-3 font-extrabold w-full min-h-[40px] items-center capitalize transition-transform transform hover:scale-105';
+  const isActiveStyle = 'flex items-center text-[14px] bg-white px-5 gap-3 font-extrabold w-full rounded-full min-h-[40px] transition-all duratin-200 ease-in-out capitalize text-black';
 
 
 
 
   return (
-    <div className='flex flex-col justify-between rounded-r-md bg-cover bg-center h-full overflow-y-scroll min-w-190 max-w-250 hide-scrollbar' style={{ backgroundImage: `url(${PurpleBackground})` }}>
+    <div className='flex flex-col justify-between rounded-r-[40px] bg-gradient-to-b from-purple-400 to-violet-700 h-full overflow-y-scroll min-w-190 max-w-250 hide-scrollbar'>
 
 
 

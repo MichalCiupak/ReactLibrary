@@ -2,12 +2,12 @@ import Sidebar from "../components/Sidebar"
 import Statistics from "./Statistics"
 import History from "./History"
 import Return from "./Return"
-import WhiteBackground from '../assets/whiteback.jpg';
+import WhiteBackground from '../assets/whitebackground.png';
 import { Link, Route, Routes } from 'react-router-dom';
 
 const Home = () => {
     return (
-        <div className='flex bg-cover bg-center bg-opacity-30' style={{ backgroundImage: `url(${WhiteBackground})` }}>
+        <div className='flex bg-cover bg-center object-cover bg-opacity-100' style={{ backgroundImage: `url(${WhiteBackground})` }}>
             <div className="hidden md:flex h-screen flex-initial">
                 <Sidebar />
             </div>
