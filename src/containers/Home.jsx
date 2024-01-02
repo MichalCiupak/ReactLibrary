@@ -15,7 +15,7 @@ const Home = () => {
                 <Routes>
 
                     <Route path='/s' element={<Statistics />} />
-                    <Route path='/h' element={<History />} />
+                    <Route path='/h*' element={<History />} />
                     <Route path='/r' element={<Return />} />
                 </Routes>
             </div>

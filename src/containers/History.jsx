@@ -1,9 +1,23 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { FaBookBookmark } from "react-icons/fa6";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
+import { Link, Route, Routes } from 'react-router-dom';
+import BookInfo from '../components/BookInfo'
 
 
 const History = () => {
+    const [isModalOpen, setModalOpen] = useState(false);
+    const [selectedBook, setSelectedBook] = useState(null);
+
+    const openModal = (book) => {
+        setSelectedBook(book);
+        setModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setSelectedBook(null);
+        setModalOpen(false);
+    };
     const [data, setData] = useState(null);
 
     useEffect(() => {
@@ -23,18 +37,35 @@ const History = () => {
     }, []);
 
     return (
-        <div className="flex justify-center bg-white min-h-[500px] m-7 p-10 shadow-lg rounded-lg">
 
+        <div className="flex justify-center bg-white min-h-[500px] m-7 p-10 shadow-lg rounded-lg">
+            <BookInfo isOpen={isModalOpen} onClose={closeModal} book={selectedBook}>
+                <h2></h2>
+                <p>To jest zawartość modala. Możesz dostosować to do swoich potrzeb.</p>
+            </BookInfo>
 
             {data ? (
                 // Jeśli dane są dostępne, renderuj je
-                <div className=' flex-col bg-gray-300 w-4/5'>
-                    {data.book.map((book) => (
-                        <div key={book.Id} className='flex  flex-row text-[15px] hover:bg-gray-300 hover:cursor-pointer bg-gray-100 pl-3  m-0.5'>
+                <div className=' flex-col bg-gray-200 w-4/5 '>
+                    <div className='flex flex-row text-[15px] m-1 font-bold'>
 
+
+                        <div className='ml-[70px] flex items-center justify-center'>Id</div>
+                        <div className='w-2/5 flex items-center justify-center '>Title</div>
+                        <div className='w-1/5 flex items-center justify-center'>Author</div>
+                        <div className='w-1/5 flex items-center justify-center'>Genre</div>
+                        <div className=' w-20 flex items-center justify-center'>Rating</div>
+                        <div className=' w-20 flex items-center justify-center'>Availability</div>
+                    </div>
+                    {data.book.map((book) => (
+                        // <Link to={`/h/${book.Id}`} element={<BookInfo />}>
+                        <div onClick={() => openModal(book)} key={book.Id} className='flex  flex-row text-[15px] hover:bg-gray-300 hover:cursor-pointer bg-gray-100 pl-3  m-0.5'>
                             <span className='text-gray-500 text-[30px] mt-3 mb-3 mr-3'><FaBookBookmark /></span>
                             <div className=' p-3 flex items-center justify-center'>{book.Id.toString().padStart(3, '0')}</div>
+
                             <div className='w-2/5 flex items-center justify-left pl-5'>{book.title}</div>
+
+
                             <div className='w-1/5 flex items-center justify-center'>{book.author}</div>
                             <div className='w-1/5 flex items-center justify-center'>{book.genre}</div>
                             <div className=' w-20 flex items-center justify-center'>{book.rating}</div>
@@ -47,16 +78,18 @@ const History = () => {
                             )}
 
                         </div>
+                        // </Link>
                     ))}
-                    <h1>{data.book[0].title}</h1>
+
 
 
                 </div>
             ) : (
                 // Jeśli dane są w trakcie ładowania, możesz dodać animację ładowania lub inny komunikat
                 <p>Loading...</p>
-            )}
-        </div>
+            )
+            }
+        </div >
     )
 }
 
