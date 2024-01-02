@@ -1,6 +1,6 @@
 import Sidebar from "../components/Sidebar"
 import Statistics from "./Statistics"
-import History from "./History"
+import BookList from "./BookList"
 import Return from "./Return"
 import WhiteBackground from '../assets/whitebackground.png';
 import { Link, Route, Routes } from 'react-router-dom';
@@ -15,7 +15,7 @@ const Home = () => {
                 <Routes>
 
                     <Route path='/s' element={<Statistics />} />
-                    <Route path='/h*' element={<History />} />
+                    <Route path='/b' element={<BookList />} />
                     <Route path='/r' element={<Return />} />
                 </Routes>
             </div>

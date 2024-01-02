@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { FaChartBar, FaBook, FaHistory } from 'react-icons/fa';
+import { BiBookReader } from "react-icons/bi";
 // import { ToTosArrowForward } from 'react-icons/io';
 import BookIcon from '../assets/BookIcon.png';
 import PurpleBackground from '../assets/purplebackground.png';
@@ -41,7 +42,7 @@ const Sidebar = () => {
         <div className='flex'>
           <NavLink to='/r'
             className={({ isActive }) => isActive ? isActiveStyle : isNotActiveStyle}>
-            < FaBook />
+            <BiBookReader />
             Book Returning
           </NavLink>
         </div>
@@ -50,6 +51,13 @@ const Sidebar = () => {
             className={({ isActive }) => isActive ? isActiveStyle : isNotActiveStyle}>
             < FaHistory />
             History
+          </NavLink>
+        </div>
+        <div className='flex'>
+          <NavLink to='/b'
+            className={({ isActive }) => isActive ? isActiveStyle : isNotActiveStyle}>
+            < FaBook />
+            Books
           </NavLink>
         </div>
       </div>
