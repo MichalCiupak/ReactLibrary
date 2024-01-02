@@ -4,7 +4,7 @@ import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 import { Link, Route, Routes } from 'react-router-dom';
 import BookInfo from '../components/BookInfo'
 
-const BookBrowser = ({ data, filter }) => {
+const BookBrowser = ({ data, filter, typeFilter }) => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
 
@@ -18,7 +18,7 @@ const BookBrowser = ({ data, filter }) => {
     setModalOpen(false);
   };
   const filteredData = data.book.filter(
-    (book) => book.title.toLowerCase().includes(filter.toLowerCase())
+    (book) => book[typeFilter].toLowerCase().includes(filter.toLowerCase())
   );
   return (
     <div className=' flex-col bg-gray-200 m-auto '>
