@@ -100,11 +100,11 @@ const OrderDisplay = ({ orders, filter, typeFilter }) => {
 
 
           <div className='ml-[70px] flex items-center justify-center'>Id</div>
-          <div className='w-2/5 flex items-center justify-center '>Order Date</div>
+          <div className='w-1/5 flex ml-5 items-center justify-center '>Order Date</div>
           <div className='w-1/5 flex items-center justify-center'>Book</div>
           <div className='w-1/5 flex items-center justify-center'>Customer</div>
-          <div className=' w-20 flex items-center justify-center'>State</div>
-          <div className=' w-20 flex items-center justify-center'>Return Date</div>
+          <div className='w-[90px] flex items-center justify-left'>State</div>
+          <div className=' w-1/5 flex items-center justify-center'>Return Date</div>
         </div>
         {
           filteredData.slice(0, visibleRecords).map((order) => (
@@ -112,16 +112,16 @@ const OrderDisplay = ({ orders, filter, typeFilter }) => {
               <span className='text-gray-500 text-[30px] mt-3 mb-3 mr-3'><FaRegAddressBook /></span>
               <div className=' p-3 flex items-center justify-center'>{order.Id.toString().padStart(3, '0')}</div>
 
-              <div className='w-2/5 flex items-center justify-left pl-5'>{formatOrderDate(order.orderDate)}</div>
+              <div className='w-1/5 flex items-center justify-center pl-5'>{formatOrderDate(order.orderDate)}</div>
 
 
               <div className='w-1/5 flex items-center justify-center'>{books[order.bookId]?.title || 'Loading...'}</div>
-              <div className='w-1/5 flex items-center justify-center'>{`${customers[order.customerId]?.name} ${customers[order.customerId]?.surname}`}</div>
-              <div className=' w-20 flex items-center justify-center'>{order.state}</div>
+              <div className='w-1/5 ml-2 flex items-center justify-center'>{`${customers[order.customerId]?.name} ${customers[order.customerId]?.surname}`}</div>
+              <div className='w-[90px] flex items-center justify-left'>{order.state}</div>
               {order.returnDate ? (
-                <div className=' w-20 flex items-center justify-center'>{formatOrderDate(order.returnDate)}</div>
+                <div className=' w-1/5 flex items-center justify-center'>{formatOrderDate(order.returnDate)}</div>
               ) : (
-                <div className=' w-20 flex items-center justify-center'>NA</div>
+                <div className=' w-1/5 flex items-center justify-center'>NA</div>
               )}
 
             </div>

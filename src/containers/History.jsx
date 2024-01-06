@@ -54,8 +54,8 @@ const History = () => {
                     ]}
                     onSelect={handleFilterChange}
                 />
-                <div className='flex items-center justify-center text-center border bg-white border-gray-300 rounded-lg p-3 m-5 hover:bg-gray-300 hover:cursor-pointer' onClick={() => ascendingSort()}>From newest</div>
-                <div className='flex items-center justify-center text-center border bg-white border-gray-300 rounded-lg p-3 m-5 hover:bg-gray-300 hover:cursor-pointer' onClick={() => descendingSort()}>From oldest</div>
+                <div className='flex items-center justify-center text-center border bg-white border-gray-300 rounded-lg p-1 ml-5 mr-5 mb-5 hover:bg-gray-300 hover:cursor-pointer' onClick={() => ascendingSort()}>From newest</div>
+                <div className='flex items-center justify-center text-center border bg-white border-gray-300 rounded-lg p-1 ml-5 mr-5 mb-5 hover:bg-gray-300 hover:cursor-pointer' onClick={() => descendingSort()}>From oldest</div>
             </div>
             {orders ? (
                 <OrderDisplay orders={orders} filter={filter} typeFilter={typeFilter} />

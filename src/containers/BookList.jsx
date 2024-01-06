@@ -30,7 +30,7 @@ const BookList = () => {
     return (
 
         <div className='m-10 rounded-lg'>
-            <div className=' sticky top-0 flex w-full flex-row'>
+            <div className=' flex w-full flex-row'>
                 <Browser onTitleChange={setFilter} />
                 <Dropdown
                     options={[
