@@ -1,6 +1,6 @@
 import React from 'react';
 
-const BookDropdown = ({ options, onSelect }) => {
+const Dropdown = ({ options, onSelect }) => {
   return (
     <div className='flex m-5 ml-auto w-1/2'>
       <select
@@ -17,4 +17,4 @@ const BookDropdown = ({ options, onSelect }) => {
   );
 };
 
-export default BookDropdown;
+export default Dropdown;

@@ -1,15 +1,14 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Spinner from '../components/Spinner';
-import BookBrowser from '../components/BookBrowser';
+import Browser from '../components/Browser';
 import BookDisplay from '../components/BookDisplay'
-import BookDropdown from '../components/BookDropdown';
+import Dropdown from '../components/Dropdown';
 
 
 const BookList = () => {
     const [filter, setFilter] = useState('');
     const [typeFilter, setTypeFilter] = useState('title');
     const [data, setData] = useState(null);
-    console.log(typeFilter);
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -30,33 +29,27 @@ const BookList = () => {
 
     return (
 
-        <div className="flex justify-center bg-white min-h-[500px] m-7 p-10 shadow-lg rounded-lg">
-
-
-            <div className='w-full'>
-                <div className='flex w-full flex-row'>
-                    <BookBrowser onTitleChange={setFilter} />
-                    <BookDropdown
-                        options={[
-                            { value: 'title', label: 'Title' },
-                            { value: 'author', label: 'Author' },
-                            { value: 'genre', label: 'Genre' },
-                            // Add more options as needed
-                        ]}
-                        onSelect={handleFilterChange}
-                    /></div>
-
-
-                {data ? (
-                    // Jeśli dane są dostępne, renderuj je
-                    <BookDisplay data={data} filter={filter} typeFilter={typeFilter} />
-                ) : (
-                    // Jeśli dane są w trakcie ładowania, możesz dodać animację ładowania lub inny komunikat
-                    <Spinner message="Searching for books" />
-                )
-                }
+        <div className='m-10 rounded-lg'>
+            <div className=' sticky top-0 flex w-full flex-row'>
+                <Browser onTitleChange={setFilter} />
+                <Dropdown
+                    options={[
+                        { value: 'title', label: 'Title' },
+                        { value: 'author', label: 'Author' },
+                        { value: 'genre', label: 'Genre' },
+                    ]}
+                    onSelect={handleFilterChange}
+                />
             </div>
-        </div >
+
+
+            {data ? (
+                <BookDisplay data={data} filter={filter} typeFilter={typeFilter} />
+            ) : (
+                <Spinner message="Searching for books" />
+            )
+            }
+        </div>
     )
 }
 

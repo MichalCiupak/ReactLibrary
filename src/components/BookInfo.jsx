@@ -25,7 +25,6 @@ const BookInfo = ({ isOpen, onClose, book, children }) => {
         <SlClose className='hover:bg-red-300 rounded-full text-red-500 text-[25px] ml-auto' />
       </div>
       {book ? (
-        // Jeśli warunek jest prawdziwy
         <div>
           <div className='flex flex-row m-3'><div className="font-bold">Title</div><div className='flex w-full items-center justify-end pr-5'>{book.title}</div></div>
           <div className='flex flex-row m-3'><div className="font-bold">Author</div><div className='flex w-full items-center justify-end pr-5'>{book.author}</div></div>
@@ -41,11 +40,8 @@ const BookInfo = ({ isOpen, onClose, book, children }) => {
           </div>
         </div>
 
-
-
       ) : (
-        // Jeśli warunek jest fałszywy
-        <h1>dd</h1>
+        <h1>Unexpected error</h1>
       )}
     </Modal>
   );

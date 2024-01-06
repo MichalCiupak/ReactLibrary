@@ -1,15 +1,13 @@
 import React from 'react';
-import BookDropdown from "./BookDropdown"
 
-
-const BookBrowser = ({ onTitleChange }) => {
+const Browser = ({ onTitleChange }) => {
 
 
   return (
     <div className='flex m-auto pl-20 w-1/2'>
 
       <input
-        className='rounded-full w-full p-3 m-5 border border-gray-300 focus:outline-none'
+        className='sticky top-0 rounded-full w-full p-3 m-5 border border-gray-300 focus:outline-none'
         type="text"
         id="titleInput"
         placeholder="Enter phrase..."
@@ -17,9 +15,8 @@ const BookBrowser = ({ onTitleChange }) => {
 
       />
 
-
     </div>
   );
 };
 
-export default BookBrowser
+export default Browser

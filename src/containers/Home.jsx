@@ -4,7 +4,7 @@ import BookList from "./BookList"
 import Return from "./Return"
 import History from "./History"
 import WhiteBackground from '../assets/whitebackground.png';
-import { Link, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 const Home = () => {
     return (

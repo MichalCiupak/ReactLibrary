@@ -1,9 +1,12 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import OrderDisplay from "../components/OrderDisplay"
 import Spinner from '../components/Spinner';
+import Browser from '../components/Browser';
+import Dropdown from '../components/Dropdown';
 
 const History = () => {
-
+    const [filter, setFilter] = useState('');
+    const [typeFilter, setTypeFilter] = useState('state');
     const [orders, setOrders] = useState(null);
     useEffect(() => {
         const fetchData = async () => {
@@ -11,7 +14,6 @@ const History = () => {
                 const response = await fetch('https://localhost:7145/v1/order');
                 const result = await response.json();
                 setOrders(result);
-                console.log(result)
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -19,13 +21,24 @@ const History = () => {
 
         fetchData();
     }, []);
+
+    const handleFilterChange = (selectedFilter) => {
+        setTypeFilter(selectedFilter);
+    };
     return (
-        <div className="flex justify-center bg-white min-h-[500px] m-7 p-10 shadow-lg rounded-lg">
+        <div className=' m-10 rounded-lg'>
+            <div className='sticky top-0 flex w-full flex-row'>
+                <Browser onTitleChange={setFilter} />
+                <Dropdown
+                    options={[
+                        { value: 'state', label: 'State' }
+                    ]}
+                    onSelect={handleFilterChange}
+                />
+            </div>
             {orders ? (
-                // Jeśli dane są dostępne, renderuj je
-                <OrderDisplay orders={orders} />
+                <OrderDisplay orders={orders} filter={filter} typeFilter={typeFilter} />
             ) : (
-                // Jeśli dane są w trakcie ładowania, możesz dodać animację ładowania lub inny komunikat
                 <Spinner message="Searching for orders" />
             )
             }
