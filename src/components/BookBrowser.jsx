@@ -12,7 +12,7 @@ const BookBrowser = ({ onTitleChange }) => {
         className='rounded-full w-full p-3 m-5 border border-gray-300 focus:outline-none'
         type="text"
         id="titleInput"
-        placeholder="Enter title..."
+        placeholder="Enter phrase..."
         onChange={(e) => onTitleChange(e.target.value)}
 
       />

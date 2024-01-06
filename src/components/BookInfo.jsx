@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from 'react-modal';
 import { SlClose } from "react-icons/sl";
+
 const BookInfo = ({ isOpen, onClose, book, children }) => {
   const customStyles = {
     content: {
