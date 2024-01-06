@@ -2,7 +2,7 @@ import React from 'react';
 import Modal from 'react-modal';
 import { SlClose } from "react-icons/sl";
 
-const BookInfo = ({ isOpen, onClose, order }) => {
+const BookInfo = ({ isOpen, onClose, order, customer, book }) => {
   const customStyles = {
     content: {
       top: '20%',
@@ -24,8 +24,14 @@ const BookInfo = ({ isOpen, onClose, order }) => {
         </div>
         <SlClose className='hover:bg-red-300 rounded-full text-red-500 text-[25px] ml-auto' />
       </div>
-      {order ? (
-        <div>{order.Id}</div>
+      {order && customer && book ? (
+        <div>{order.Id}
+          <div>
+            {customer.name}
+            {book.title}
+          </div>
+        </div>
+
       ) : (
         <h1>Unexpected error</h1>
       )}
