@@ -12,7 +12,7 @@ const Sidebar = () => {
     <div className='flex flex-col rounded-r-[40px] bg-gradient-to-b from-purple-400 to-violet-700 h-full overflow-y-scroll min-w-190 max-w-250 hide-scrollbar'>
 
       <div className='flex items-center justify-center'>
-        <Link to="/" className='flex gap-2 my-2 pt-1 items-center hover:transform hover:scale-110 transition-transform'>
+        <Link to="/login" className='flex gap-2 my-2 pt-1 items-center hover:transform hover:scale-110 transition-transform'>
           <img src={BookIcon} alt='logo' className='w-10' />
           <span className="text-white font-bold font-serif text-lg"> Library <br></br>Dashboard</span>
         </Link>
