@@ -10,9 +10,9 @@ const BookInfo = ({ isOpen, onClose, order, customer, book }) => {
   };
   const customStyles = {
     content: {
-      top: '20%',
+      top: '5%',
       left: '50%',
-      transform: 'translate(-50%, -20%)',
+      transform: 'translate(-50%, -5%)',
       boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
     },
   };
@@ -36,7 +36,7 @@ const BookInfo = ({ isOpen, onClose, order, customer, book }) => {
             <div className=' flex flex-row m-3'><div className="w-1/3 font-bold">Date of return</div><div className='flex w-full items-center justify-end pr-5'>{formatOrderDate(order.returnDate)}</div></div>
           ) : (
             <div className='flex flex-row m-3'><div className="w-1/3 font-bold">Date of return</div><div className='flex w-full items-center justify-end pr-5  text-red-600'>Not returned</div></div>)}
-
+          <div className='flex flex-row m-3'><div className="w-1/3 font-bold">Book Id</div><div className='flex w-full items-center justify-end pr-5'>{order.bookId}</div></div>
           <div className='flex flex-row m-3'><div className="font-bold">Author</div><div className='flex w-full items-center justify-end pr-5'>{book.author}</div></div>
           <div className='flex flex-row m-3'><div className="font-bold">Genre</div><div className='flex w-full items-center justify-end pr-5'>{book.genre}</div></div>
           <div className='flex flex-row m-3'><div className="font-bold">Rating</div><div className='flex w-full items-center justify-end pr-5'>{book.rating}</div></div>

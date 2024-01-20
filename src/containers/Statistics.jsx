@@ -34,7 +34,7 @@ const Statistics = () => {
     function findMostFrequentString(strings) {
         // Utwórz obiekt do zliczania wystąpień każdego stringa
         if (!strings || strings.length === 0) {
-            console.error('Lista stringów jest pusta lub null.');
+            console.error('List of strings is empty');
             return null;
         }
         const stringOccurrences = {};
@@ -77,6 +77,9 @@ const Statistics = () => {
     // });
     const booksByTitles = books?.book.map((book) => book.title);
     const booksByTitlesAmount = [...new Set(booksByTitles)].length;
+    const orderedBooksByTitles = bookHistory?.Order.map((order) => order.title);
+    const orderedBooksByTitlesAmount = [...new Set(orderedBooksByTitles)].length;
+    console.log(orderedBooksByTitles)
     console.log(booksByTitles)
     const topBook = findMostFrequentString(booksByTitles);
 
@@ -115,7 +118,7 @@ const Statistics = () => {
         labels: booksCountByGenre.map((item) => item.genre),
         datasets: [
             {
-                label: 'Liczba książek na kategorie',
+                label: 'Number of books per category',
                 data: booksCountByGenre.map((item) => item.count),
                 backgroundColor: 'rgba(199, 66, 205, 0.8)', // Kolor wypełnienia słupków
                 borderColor: 'rgba(175, 44, 181, 0.8)', // Kolor obramowania słupków
@@ -128,7 +131,7 @@ const Statistics = () => {
         labels: booksCountByGenre.map((item) => item.genre),
         datasets: [
             {
-                label: 'Liczba wypożyczonych książek na kategorie',
+                label: 'Number of ordered books per category',
                 data: orderedBooksCountByGenre.map((item) => item.count),
                 backgroundColor: 'rgba(54, 149, 206, 0.8)', // Kolor wypełnienia słupków
                 borderColor: 'rgba(75, 192, 192, 1)', // Kolor obramowania słupków
@@ -138,12 +141,12 @@ const Statistics = () => {
     };
 
     const pieData = {
-        labels: ['Label 1', 'Label 2', 'Label 3'],
+        labels: ['Ordered books', 'Books never ordered'],
         datasets: [
             {
-                data: [30, 50, 20], // Procentowy udział dla każdej etykiety
-                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'], // Kolory dla każdej etykiety
-                hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+                data: [booksByTitlesAmount - orderedBooksByTitlesAmount, orderedBooksByTitlesAmount], // Procentowy udział dla każdej etykiety
+                backgroundColor: ['#FF6384', '#36A2EB'], // Kolory dla każdej etykiety
+                hoverBackgroundColor: ['#FF6384', '#36A2EB'],
             },
         ],
     };
@@ -155,59 +158,63 @@ const Statistics = () => {
         <div className="flex flex-col bg-red-200 m-10 p-10 shadow-lg rounded-lg">
             <div className='grid grid-cols-4 gap-4'>
                 <div className='flex m-10 p-3 rounded-lg hover:scale-105 items-center font-bold bg-white shadow-md'>
-                    <div className='text-[14px] p-2'>Liczba zarejestrowanych użytkowników:</div>
+                    <div className='text-[14px] p-2'>Number of registered users:</div>
                     <div className='text-[28px] p-2'>{CustomerAmount}</div>
                 </div>
                 <div className='flex m-10 p-3 rounded-lg hover:scale-105 items-center font-bold bg-white shadow-md'>
-                    <div className='text-[14px] p-2'>Liczba obecnie wypożyczonych pozycji:</div>
+                    <div className='text-[14px] p-2'>Number of currently ordered books:</div>
                     <div className='text-[28px] p-2'>{OrderedBooksNow}</div>
                 </div>
                 <div className='flex m-10 p-3 rounded-lg hover:scale-105 items-center font-bold bg-white shadow-md'>
-                    <div className='text-[14px] p-2'>Liczba dostępnych tytułów:</div>
+                    <div className='text-[14px] p-2'>Number of available titles:</div>
                     <div className='text-[28px] p-2'>{booksByTitlesAmount}</div>
                 </div>
                 <div className='flex flex-col m-10 p-3 rounded-lg hover:scale-105 items-center font-bold bg-white shadow-md'>
                     <div className='flex flex-row items-center'>
-                        <div className='text-[14px] p-2'>Najczęsciej wypożyczana pozycja:</div>
+                        <div className='text-[14px] p-2'>Most frequently ordered title:</div>
                         <div className='text-[28px] p-2'>{topBook?.mostFrequentString}</div>
                     </div>
                     <div className='flex flex-row items-center'>
-                        <div className='text-[12px] p-2'>Liczba wypożyczeń:</div>
+                        <div className='text-[12px] p-2'>Number of orders:</div>
                         <div className='text-[22px] p-2'>{topBook?.occurrences}</div>
                     </div>
                 </div>
             </div>
+            <div className='flex flex-row'>
+                <div>
+                    <div className='flex m-5 bg-white p-5 items-center rounded-lg shadow-md flex w-[600px]'>
+                        <Bar
+                            data={chartDataBooks}
+                            options={{
+                                scales: {
+                                    y: {
+                                        type: 'linear', // Tutaj określasz typ skali jako 'linear'
+                                        beginAtZero: true,
+                                    },
+                                },
+                            }}
+                        />
+                    </div>
+                    <div className='flex m-5 bg-white p-5 items-center rounded-lg shadow-md flex w-[600px]'>
+                        <Bar
+                            data={chartDataOrderedBooks}
+                            options={{
+                                scales: {
+                                    y: {
+                                        type: 'linear', // Tutaj określasz typ skali jako 'linear'
+                                        beginAtZero: true,
+                                    },
+                                },
+                            }}
+                        />
 
-            <div className='flex m-5 bg-white p-5 items-center rounded-lg shadow-md flex w-[600px]'>
-                <Bar
-                    data={chartDataBooks}
-                    options={{
-                        scales: {
-                            y: {
-                                type: 'linear', // Tutaj określasz typ skali jako 'linear'
-                                beginAtZero: true,
-                            },
-                        },
-                    }}
-                />
+                    </div>
+                </div>
+
+                <div className='flex w-full items-center justify-center'>
+                    <Pie data={pieData} />
+                </div>
             </div>
-            <div className='flex m-5 bg-white p-5 items-center rounded-lg shadow-md flex w-[600px]'>
-                <Bar
-                    data={chartDataOrderedBooks}
-                    options={{
-                        scales: {
-                            y: {
-                                type: 'linear', // Tutaj określasz typ skali jako 'linear'
-                                beginAtZero: true,
-                            },
-                        },
-                    }}
-                />
-
-            </div>
-
-
-            <Pie data={pieData} />
         </div>
 
     )
