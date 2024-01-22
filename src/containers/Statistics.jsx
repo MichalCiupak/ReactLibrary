@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Bar, Pie } from 'react-chartjs-2';
-// import Plot from 'react-plotly.js';
-// import Plotly from 'plotly.js';
-// import Chart from 'react-apexcharts';
-import Chart from 'chart.js/auto';
 
 const Statistics = () => {
     const [books, setBooks] = useState(null);
     const [orders, setOrders] = useState(null);
     const [customers, setCustomers] = useState(null);
     const [bookHistory, setBookHistory] = useState(null);
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -32,14 +29,12 @@ const Statistics = () => {
     }, []);
 
     function findMostFrequentString(strings) {
-        // Utwórz obiekt do zliczania wystąpień każdego stringa
         if (!strings || strings.length === 0) {
             console.error('List of strings is empty');
             return null;
         }
         const stringOccurrences = {};
 
-        // Przetwórz listę stringów i zlicz wystąpienia każdego z nich
         strings.forEach((str) => {
             if (stringOccurrences[str]) {
                 stringOccurrences[str]++;
@@ -47,8 +42,6 @@ const Statistics = () => {
                 stringOccurrences[str] = 1;
             }
         });
-
-        // Znajdź najczęściej występujący string i liczbę jego wystąpień
         let mostFrequentString;
         let maxOccurrences = 0;
 
@@ -65,39 +58,16 @@ const Statistics = () => {
         };
     }
 
-    // const bookOccurrences = {};
-    // bookHistory.Order.array.forEach((order) => {
-    //     const bookId = order.bookId;
-
-    //     if (bookOccurrences[bookId]) {
-    //         bookOccurrences[bookId]++;
-    //     } else {
-    //         bookOccurrences[bookId] = 1;
-    //     }
-    // });
     const booksByTitles = books?.book.map((book) => book.title);
     const booksByTitlesAmount = [...new Set(booksByTitles)].length;
-    const orderedBooksByTitles = bookHistory?.Order.map((order) => order.title);
+    const orderedBooksByTitles = bookHistory?.Order.map((order) => order.bookTitle);
     const orderedBooksByTitlesAmount = [...new Set(orderedBooksByTitles)].length;
-    console.log(orderedBooksByTitles)
-    console.log(booksByTitles)
     const topBook = findMostFrequentString(booksByTitles);
-
-
-
-    console.log(books)
-    console.log(customers)
-    console.log(bookHistory)
 
 
     const CustomerAmount = customers?.customer.length;
     const OrderedBooksNow = books?.book.filter((book) => book.availability === false).length;
 
-
-    // const orderedBooks = orders?.Order.filter((order) => order.)
-    const orderedGenres = orders?.Order.map((order) => order.genre)
-    console.log(bookHistory)
-    console.log(books)
     const genres = books?.book.map((book) => book.genre);
     const uniqueGenres = [...new Set(genres)];
 
@@ -111,8 +81,6 @@ const Statistics = () => {
         genre,
         count: genres.filter((g) => g === genre).length,
     }));
-    // console.log(orderedBooksCountByGenre)
-    // console.log(booksCountByGenre)
 
     const chartDataBooks = {
         labels: booksCountByGenre.map((item) => item.genre),
@@ -120,8 +88,8 @@ const Statistics = () => {
             {
                 label: 'Number of books per category',
                 data: booksCountByGenre.map((item) => item.count),
-                backgroundColor: 'rgba(199, 66, 205, 0.8)', // Kolor wypełnienia słupków
-                borderColor: 'rgba(175, 44, 181, 0.8)', // Kolor obramowania słupków
+                backgroundColor: 'rgba(199, 66, 205, 0.8)',
+                borderColor: 'rgba(175, 44, 181, 0.8)',
                 borderWidth: 1,
             },
         ],
@@ -133,8 +101,8 @@ const Statistics = () => {
             {
                 label: 'Number of ordered books per category',
                 data: orderedBooksCountByGenre.map((item) => item.count),
-                backgroundColor: 'rgba(54, 149, 206, 0.8)', // Kolor wypełnienia słupków
-                borderColor: 'rgba(75, 192, 192, 1)', // Kolor obramowania słupków
+                backgroundColor: 'rgba(54, 149, 206, 0.8)',
+                borderColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 1,
             },
         ],
@@ -144,8 +112,8 @@ const Statistics = () => {
         labels: ['Ordered books', 'Books never ordered'],
         datasets: [
             {
-                data: [booksByTitlesAmount - orderedBooksByTitlesAmount, orderedBooksByTitlesAmount], // Procentowy udział dla każdej etykiety
-                backgroundColor: ['#FF6384', '#36A2EB'], // Kolory dla każdej etykiety
+                data: [booksByTitlesAmount - orderedBooksByTitlesAmount, orderedBooksByTitlesAmount],
+                backgroundColor: ['#FF6384', '#36A2EB'],
                 hoverBackgroundColor: ['#FF6384', '#36A2EB'],
             },
         ],
@@ -188,7 +156,7 @@ const Statistics = () => {
                             options={{
                                 scales: {
                                     y: {
-                                        type: 'linear', // Tutaj określasz typ skali jako 'linear'
+                                        type: 'linear',
                                         beginAtZero: true,
                                     },
                                 },
@@ -201,7 +169,7 @@ const Statistics = () => {
                             options={{
                                 scales: {
                                     y: {
-                                        type: 'linear', // Tutaj określasz typ skali jako 'linear'
+                                        type: 'linear',
                                         beginAtZero: true,
                                     },
                                 },

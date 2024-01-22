@@ -65,7 +65,6 @@ const BookDisplay = ({ data, filter, typeFilter }) => {
           </div>
         ))}
 
-
       </div>
       <div className='flex flex-row items-center justify-center text-[15px] m-5 font-bold'>
         <div onClick={() => showMore()} className='flex bg-gray-300 hover:cursor-pointer hover:bg-gray-400 rounded-lg m-3 p-2'>Show More</div>

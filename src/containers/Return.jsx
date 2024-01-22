@@ -7,7 +7,50 @@ const Return = () => {
     const [ownerId, setOwnerId] = useState('');
     const [book, setBook] = useState(null);
     const [customer, setCustomer] = useState(null);
+    const [responseData, setResponseData] = useState(null);
 
+    const returnBook = async () => {
+        const urlBook = 'https://localhost:7145/v1/book/return';
+        const urlOrder = 'https://localhost:7145/v1/order/return';
+
+        const requestDataBook = {
+            id: parseInt(bookId),
+            CurrentOwnerId: parseInt(ownerId)
+        };
+        const requestDataOrder = {
+            bookId: parseInt(bookId),
+            customerId: parseInt(ownerId)
+        };
+
+        try {
+            const responseBook = await fetch(urlBook, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestDataBook),
+            });
+
+            const responseOrder = await fetch(urlOrder, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestDataOrder),
+            });
+
+            if (responseBook.ok && responseOrder.ok) {
+                const responseDatatmp = await responseBook.json();
+                setResponseData(responseDatatmp);
+                console.log(`Book returned successfully with ID: ${responseData.id}`);
+            } else {
+                console.error('Error returning book:', responseData.statusText);
+            }
+
+        } catch (error) {
+            console.error('Error returning book:', error.message);
+        }
+    };
 
     const handleBookChange = (e) => {
         const fetchDataBook = async () => {
@@ -41,10 +84,6 @@ const Return = () => {
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        // Perform authentication logic with email and password
-        // console.log('Email:', email);
-        // console.log('Password:', password);
-        // Add authentication logic here, such as calling an API
     };
     return (
         <div className='min-h-screen bg-gray-300 items-center justify-center flex object-cover bg-opacity-60' style={{ backgroundImage: `url(${WhiteBackground})` }}>
@@ -94,9 +133,14 @@ const Return = () => {
                                 </div>
                             </div>
                         </div>
-                        <button className="flex items-center w-1/3 justify-center m-auto bg-violet-400 w-1/2 p-2 font-bold rounded-lg mt-5 hover:bg-violet-500 hover:scale-105" type="submit">Return book to system</button>
+                        <button onClick={() => returnBook()} className="flex items-center w-1/3 justify-center m-auto bg-violet-400 w-1/2 p-2 font-bold rounded-lg mt-5 hover:bg-violet-500 hover:scale-105" type="submit">Return book to system</button>
                     </form>
                 </div>
+                {responseData ? (
+                    <div className='text-green-300'>Book returned successfully with ID: {responseData.id}</div>
+                ) : (
+                    <div></div>
+                )}
             </div>
 
         </div >

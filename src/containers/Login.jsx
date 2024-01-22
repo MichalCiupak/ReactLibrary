@@ -1,12 +1,48 @@
 import WhiteBackground from '../assets/whitebackground.png';
 import BookIcon from '../assets/BookIcon.png';
+import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [userMessage, setUserMessage] = useState('');
+    const navigate = useNavigate();
 
+    const Login = async () => {
+        const urlLogin = `https://localhost:7145/v1/auth/${email}/${password}`;
+
+        try {
+            fetch(urlLogin, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(response.message);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    setUserMessage(data.Message);
+                    if (data.isSuccess) {
+                        navigate('/', { replace: true });
+                    }
+                    console.log('Server Response:', data.Message);
+                    console.log('Is Success:', data.isSuccess);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+
+        } catch (error) {
+            console.error('Error returning book:', error.message);
+        }
+
+    };
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
@@ -18,10 +54,7 @@ const Login = () => {
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        // Perform authentication logic with email and password
-        console.log('Email:', email);
-        console.log('Password:', password);
-        // Add authentication logic here, such as calling an API
+
     };
     return (
         <div className='min-h-screen bg-gray-300 items-center justify-center flex object-cover bg-opacity-60' style={{ backgroundImage: `url(${WhiteBackground})` }}>
@@ -60,8 +93,9 @@ const Login = () => {
                                 placeholder="Enter your password"
                             />
                         </div>
-                        <button className="flex items-center justify-center m-auto bg-violet-400 w-1/2 p-2 font-bold rounded-lg mt-5 hover:bg-violet-500 hover:scale-105" type="submit">Login</button>
+                        <button onClick={() => Login()} className="flex items-center justify-center m-auto bg-violet-400 w-1/2 p-2 font-bold rounded-lg mt-5 hover:bg-violet-500 hover:scale-105" type="submit">Login</button>
                     </form>
+                    <div className='flex p-2 text-red-600 items-center justify-center'>{userMessage}</div>
                 </div>
             </div>
 

@@ -34,8 +34,6 @@ const OrderDisplay = ({ orders, filter, typeFilter }) => {
     setVisibleRecords(orders.length);
   };
 
-
-
   const fetchData = async () => {
     try {
       const bookPromises = orders.map(async (order) => {
@@ -78,7 +76,7 @@ const OrderDisplay = ({ orders, filter, typeFilter }) => {
       obj = customers[order.customerId];
     } else {
       console.error("Invalid typeFilter value");
-      return; // or handle the error in another way
+      return;
     }
     if (obj) {
       return obj[typeFilter]?.toLowerCase().includes(filter.toLowerCase());
@@ -87,10 +85,6 @@ const OrderDisplay = ({ orders, filter, typeFilter }) => {
   }
   );
 
-
-  // const filteredData = orders.Order.filter(
-  //   (order) => order[typeFilter].toLowerCase().includes(filter.toLowerCase())
-  // );
   return (
     <div>
       <div className=' flex-col bg-gray-200 m-auto  rounded-lg'>
