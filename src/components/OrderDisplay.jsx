@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaRegAddressBook } from "react-icons/fa";
 import OrderInfo from './OrderInfo'
-import { format, parseISO, setDate } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 
 const OrderDisplay = ({ orders, filter, typeFilter }) => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -76,7 +76,7 @@ const OrderDisplay = ({ orders, filter, typeFilter }) => {
       obj = customers[order.customerId];
     } else {
       console.error("Invalid typeFilter value");
-      return;
+      return false;
     }
     if (obj) {
       return obj[typeFilter]?.toLowerCase().includes(filter.toLowerCase());

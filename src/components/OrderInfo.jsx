@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from 'react-modal';
 import { SlClose } from "react-icons/sl";
-import { format, parseISO, setDate } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 
 const BookInfo = ({ isOpen, onClose, order, customer, book }) => {
   const formatOrderDate = (orderDate) => {

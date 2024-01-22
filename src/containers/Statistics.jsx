@@ -3,7 +3,6 @@ import { Bar, Pie } from 'react-chartjs-2';
 
 const Statistics = () => {
     const [books, setBooks] = useState(null);
-    const [orders, setOrders] = useState(null);
     const [customers, setCustomers] = useState(null);
     const [bookHistory, setBookHistory] = useState(null);
 

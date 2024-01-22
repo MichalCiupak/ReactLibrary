@@ -1,7 +1,7 @@
 import WhiteBackground from '../assets/whitebackground.png';
 import BookIcon from '../assets/BookIcon.png';
 import { useNavigate } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 
 const Login = () => {

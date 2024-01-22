@@ -1,6 +1,6 @@
 import WhiteBackground from '../assets/whitebackground.png';
 import BookIcon from '../assets/BookIcon.png';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 const Return = () => {
     const [bookId, setBookId] = useState('');
