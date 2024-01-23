@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Bar, Pie } from 'react-chartjs-2';
+import { Chart, registerables } from 'chart.js';
+Chart.register(...registerables);
 
 const Statistics = () => {
     const [books, setBooks] = useState(null);
@@ -9,15 +11,15 @@ const Statistics = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response1 = await fetch('https://localhost:7145/v1/book');
+                const response1 = await fetch('https://libraryappgrpc.azurewebsites.net/v1/book');
                 const result1 = await response1.json();
                 setBooks(result1);
 
-                const response2 = await fetch('https://localhost:7145/v1/customer');
+                const response2 = await fetch('https://libraryappgrpc.azurewebsites.net/v1/customer');
                 const result2 = await response2.json();
                 setCustomers(result2);
 
-                const response3 = await fetch('https://localhost:7145/v1/statistics');
+                const response3 = await fetch('https://libraryappgrpc.azurewebsites.net/v1/statistics');
                 const result3 = await response3.json();
                 setBookHistory(result3);
             } catch (error) {
@@ -122,7 +124,7 @@ const Statistics = () => {
 
 
     return (
-        <div className="flex flex-col bg-red-200 m-10 p-10 shadow-lg rounded-lg">
+        <div className="flex flex-col bg-gray-200 m-10 p-10 shadow-lg rounded-lg">
             <div className='grid grid-cols-4 gap-4'>
                 <div className='flex m-10 p-3 rounded-lg hover:scale-105 items-center font-bold bg-white shadow-md'>
                     <div className='text-[14px] p-2'>Number of registered users:</div>

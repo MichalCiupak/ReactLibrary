@@ -12,7 +12,7 @@ const History = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('https://localhost:7145/v1/order');
+                const response = await fetch('https://libraryappgrpc.azurewebsites.net/v1/order');
                 const result = await response.json();
                 setOrders(result.Order);
                 console.log(result);

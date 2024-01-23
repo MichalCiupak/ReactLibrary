@@ -11,7 +11,7 @@ const Login = () => {
     const navigate = useNavigate();
 
     const Login = async () => {
-        const urlLogin = `https://localhost:7145/v1/auth/${email}/${password}`;
+        const urlLogin = `https://libraryappgrpc.azurewebsites.net/v1/auth/${email}/${password}`;
 
         try {
             fetch(urlLogin, {
@@ -29,7 +29,7 @@ const Login = () => {
                 .then(data => {
                     setUserMessage(data.Message);
                     if (data.isSuccess) {
-                        navigate('/', { replace: true });
+                        navigate('/s', { replace: true });
                     }
                     console.log('Server Response:', data.Message);
                     console.log('Is Success:', data.isSuccess);

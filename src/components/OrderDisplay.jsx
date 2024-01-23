@@ -37,12 +37,12 @@ const OrderDisplay = ({ orders, filter, typeFilter }) => {
   const fetchData = async () => {
     try {
       const bookPromises = orders.map(async (order) => {
-        const response = await fetch(`https://localhost:7145/v1/book/${order.bookId}`);
+        const response = await fetch(`https://libraryappgrpc.azurewebsites.net/v1/book/${order.bookId}`);
         return { [order.bookId]: await response.json() };
       });
 
       const customerPromises = orders.map(async (order) => {
-        const response = await fetch(`https://localhost:7145/v1/customer/${order.customerId}`);
+        const response = await fetch(`https://libraryappgrpc.azurewebsites.net/v1/customer/${order.customerId}`);
         return { [order.customerId]: await response.json() };
       });
 

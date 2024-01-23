@@ -34,6 +34,13 @@ const BookInfo = ({ isOpen, onClose, book, children }) => {
             <div className='flex flex-row m-3'><div className="font-bold">Availability</div><div className='flex w-full items-center justify-end pr-5 text-green-600'>Available</div></div>
           ) : (
             <div className='flex flex-row m-3'><div className="font-bold">Availability</div><div className='flex w-full items-center justify-end pr-5  text-red-600'>Unavailable</div></div>)}
+
+          {book.CurrentOwnerId ? (
+            <div className='flex flex-row m-3'><div className="font-bold">OwnerId</div><div className='flex w-full items-center justify-end pr-5'>{book.CurrentOwnerId}</div></div>
+          ) : (
+            <div></div>
+          )}
+
           <div className='flex flex-col mr-3 ml-3 mt-8'>
             <div className="flex font-bold">Description</div>
             <div className='flex mt-2'>{book.description}</div>

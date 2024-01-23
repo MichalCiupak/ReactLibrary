@@ -12,7 +12,7 @@ const BookList = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('https://localhost:7145/v1/book');
+                const response = await fetch('https://libraryappgrpc.azurewebsites.net/v1/book');
                 const result = await response.json();
                 setData(result);
             } catch (error) {

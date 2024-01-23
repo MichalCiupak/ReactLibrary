@@ -10,8 +10,10 @@ const Return = () => {
     const [responseData, setResponseData] = useState(null);
 
     const returnBook = async () => {
-        const urlBook = 'https://localhost:7145/v1/book/return';
-        const urlOrder = 'https://localhost:7145/v1/order/return';
+        const urlBook = 'https://libraryappgrpc.azurewebsites.net/v1/book/return';
+        const urlOrder = 'https://libraryappgrpc.azurewebsites.net/v1/order/return';
+
+        console.log("odanie")
 
         const requestDataBook = {
             id: parseInt(bookId),
@@ -31,6 +33,9 @@ const Return = () => {
                 body: JSON.stringify(requestDataBook),
             });
 
+            console.log(bookId)
+            console.log(ownerId)
+
             const responseOrder = await fetch(urlOrder, {
                 method: 'PUT',
                 headers: {
@@ -38,13 +43,13 @@ const Return = () => {
                 },
                 body: JSON.stringify(requestDataOrder),
             });
-
+            console.log(responseData)
             if (responseBook.ok && responseOrder.ok) {
                 const responseDatatmp = await responseBook.json();
                 setResponseData(responseDatatmp);
-                console.log(`Book returned successfully with ID: ${responseData.id}`);
+                console.log(`Book returned successfully`);
             } else {
-                console.error('Error returning book:', responseData.statusText);
+                console.error('Error returning book:', responseBook.statusText);
             }
 
         } catch (error) {
@@ -55,7 +60,7 @@ const Return = () => {
     const handleBookChange = (e) => {
         const fetchDataBook = async () => {
             try {
-                const response = await fetch(`https://localhost:7145/v1/book/${e.target.value}`);
+                const response = await fetch(`https://libraryappgrpc.azurewebsites.net/v1/book/${e.target.value}`);
                 const result = await response.json();
                 setBook(result);
                 console.log(result);
@@ -70,7 +75,7 @@ const Return = () => {
     const handleOwnerChange = (e) => {
         const fetchDataOrd = async () => {
             try {
-                const response = await fetch(`https://localhost:7145/v1/customer/${e.target.value}`);
+                const response = await fetch(`https://libraryappgrpc.azurewebsites.net/v1/customer/${e.target.value}`);
                 const result = await response.json();
                 setCustomer(result);
                 console.log(result);
@@ -137,7 +142,7 @@ const Return = () => {
                     </form>
                 </div>
                 {responseData ? (
-                    <div className='text-green-300'>Book returned successfully with ID: {responseData.id}</div>
+                    <div className='text-green-300'>Book returned successfully</div>
                 ) : (
                     <div></div>
                 )}
