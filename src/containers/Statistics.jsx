@@ -113,7 +113,7 @@ const Statistics = () => {
         labels: ['Ordered books', 'Books never ordered'],
         datasets: [
             {
-                data: [booksByTitlesAmount - orderedBooksByTitlesAmount, orderedBooksByTitlesAmount],
+                data: [orderedBooksByTitlesAmount, booksByTitlesAmount - orderedBooksByTitlesAmount],
                 backgroundColor: ['#FF6384', '#36A2EB'],
                 hoverBackgroundColor: ['#FF6384', '#36A2EB'],
             },
